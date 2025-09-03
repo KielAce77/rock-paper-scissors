@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>Rock Paper Scissors</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Space Background -->
+    <div class="space-background">
+        <div class="stars"></div>
+        <div class="twinkling"></div>
+        <div class="clouds"></div>
+        <div class="milky-way"></div>
+        <div class="shooting-stars"></div>
+    </div>
+
+    <!-- Forest Background -->
+    <div class="forest-background">
+        <div class="trees"></div>
+        <div class="leaves"></div>
+        <div class="grass"></div>
+        <div class="sunlight"></div>
+    </div>
+
+    <div class="container">
+        <!-- Theme Controls -->
+        <div class="controls-bar">
+            <!-- Game Title -->
+            <div class="game-title">
+                <h1><i class="fas fa-hand-rock"></i> Rock Paper Scissors <i class="fas fa-hand-scissors"></i></h1>
+            </div>
+            
+            <div class="controls-group">
+                <div class="theme-controls">
+                    <button id="themeBtn" class="control-btn" title="Change Theme">
+                        <i class="fas fa-palette"></i>
+                    </button>
+                    <div class="theme-dropdown" id="themeDropdown">
+                        <button class="theme-option" data-theme="dark">🌙 Dark</button>
+                        <button class="theme-option" data-theme="neon">✨ Neon</button>
+                        <button class="theme-option" data-theme="ocean">🌊 Ocean</button>
+                        <button class="theme-option" data-theme="space">🚀 Space</button>
+                    </div>
+                </div>
+                <div class="difficulty-controls">
+                    <button id="difficultyBtn" class="control-btn" title="Change Difficulty">
+                        <i class="fas fa-brain"></i>
+                    </button>
+                    <div class="difficulty-dropdown" id="difficultyDropdown">
+                        <button class="difficulty-option" data-difficulty="easy">😊 Easy</button>
+                        <button class="difficulty-option" data-difficulty="medium">😐 Medium</button>
+                        <button class="difficulty-option" data-difficulty="hard">😈 Hard</button>
+                        <button class="difficulty-option" data-difficulty="expert">🤖 Expert</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Difficulty Display -->
+        <div class="difficulty-display">
+            <div class="difficulty-badge" id="difficultyBadge">
+                <i class="fas fa-brain"></i>
+                <span id="difficultyText">Easy</span>
+            </div>
+        </div>
+
+
+
+        <!-- Scoreboard and Streak -->
+        <div class="scoreboard-container">
+            <div class="scoreboard">
+                <div class="score-item">
+                    <span class="label">Wins</span>
+                    <span class="score" id="wins">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">Losses</span>
+                    <span class="score" id="losses">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">Draws</span>
+                    <span class="score" id="draws">0</span>
+                </div>
+            </div>
+            <div class="streak-counter">
+                <div class="streak-icon">🔥</div>
+                <div class="streak-info">
+                    <span class="streak-label">Streak</span>
+                    <span class="streak-value" id="streak">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div class="game-area">
+            <div class="choice-section">
+                <h2>You</h2>
+                <div class="avatar-container">
+                    <div class="avatar" id="playerAvatar">
+                        <i class="fas fa-user-ninja"></i>
+                    </div>
+                </div>
+                <div class="choice-display" id="playerChoice">
+                    <i class="fas fa-question"></i>
+                </div>
+            </div>
+            
+            <div class="vs-section">
+                <div class="vs-text">VS</div>
+            </div>
+            
+            <div class="choice-section">
+                <h2>Computer</h2>
+                <div class="avatar-container">
+                    <div class="avatar" id="computerAvatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                </div>
+                <div class="choice-display" id="computerChoice">
+                    <i class="fas fa-question"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Message -->
+        <div class="result-message" id="resultMessage">
+            Choose your weapon!
+        </div>
+
+        <!-- Game Controls -->
+        <div class="game-controls">
+            <button class="choice-btn" data-choice="rock">
+                <i class="fas fa-hand-rock"></i>
+                <span>Rock</span>
+            </button>
+            <button class="choice-btn" data-choice="paper">
+                <i class="fas fa-hand-paper"></i>
+                <span>Paper</span>
+            </button>
+            <button class="choice-btn" data-choice="scissors">
+                <i class="fas fa-hand-scissors"></i>
+                <span>Scissors</span>
+            </button>
+        </div>
+
+        <!-- Reset Section -->
+        <div class="reset-section">
+            <button class="reset-btn" id="resetBtn">
+                <i class="fas fa-redo"></i>
+                Reset Game
+            </button>
+        </div>
+    </div>
+
+    <!-- Victory Screen -->
+    <div class="victory-screen" id="victoryScreen">
+        <div class="victory-content">
+            <div class="victory-icon">🎉</div>
+            <h2 class="victory-title">Victory!</h2>
+            <p class="victory-message" id="victoryMessage"></p>
+            <button class="victory-close" id="victoryClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>

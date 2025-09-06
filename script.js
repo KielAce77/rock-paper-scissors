@@ -8,6 +8,11 @@ let gameState = {
     difficulty: 'easy'
 };
 
+// Player move history for AI analysis
+let playerMoveHistory = [];
+let computerMoveHistory = [];
+let lastPlayerMove = null;
+
 // DOM elements
 const elements = {
     wins: document.getElementById('wins'),
@@ -77,37 +82,35 @@ const avatarThemes = {
 const difficultyStrategies = {
     easy: {
         name: 'Easy',
-        description: 'Computer plays randomly with occasional mistakes',
-        winRate: 0.25,
-        strategy: 'random',
-        mistakeRate: 0.4
+        description: 'Computer mostly loses or draws on purpose (85% of the time)',
+        winRate: 0.15,
+        strategy: 'lose_on_purpose',
+        loseRate: 0.85
     },
     medium: {
         name: 'Medium',
-        description: 'Computer has basic pattern recognition',
-        winRate: 0.45,
-        strategy: 'pattern',
-        mistakeRate: 0.2
+        description: 'Computer chooses moves completely at random with no bias',
+        winRate: 0.33,
+        strategy: 'random',
+        loseRate: 0.0
     },
     hard: {
         name: 'Hard',
-        description: 'Computer adapts to your moves',
-        winRate: 0.65,
-        strategy: 'adaptive',
-        mistakeRate: 0.1
+        description: 'Computer uses basic counter strategy, predicting and countering your last move',
+        winRate: 0.6,
+        strategy: 'counter_last',
+        loseRate: 0.0
     },
     expert: {
         name: 'Expert',
-        description: 'Computer uses advanced AI',
-        winRate: 0.85,
-        strategy: 'ai',
-        mistakeRate: 0.05
+        description: 'Computer analyzes your most frequent choices and uses probability to counter',
+        winRate: 0.8,
+        strategy: 'analyze_patterns',
+        loseRate: 0.0
     }
 };
 
-// Player move history for AI
-let playerMoveHistory = [];
-let computerMoveHistory = [];
+// Move history tracking (already declared above)
 
 // Initialize the game
 function initGame() {
@@ -194,21 +197,17 @@ function setupEventListeners() {
     });
 
 
-
     // Victory screen close
     elements.victoryClose.addEventListener('click', () => {
         hideVictoryScreen();
     });
 
-    // Close dropdowns when clicking outside
+    // Close dropdowns and modals when clicking outside
     document.addEventListener('click', (e) => {
-        if (!e.target.closest('.theme-controls')) {
+        if (!e.target.closest('.control-group')) {
             elements.themeDropdown.classList.remove('show');
-        }
-        if (!e.target.closest('.difficulty-controls')) {
             elements.difficultyDropdown.classList.remove('show');
         }
-
     });
 }
 
@@ -236,23 +235,43 @@ function handlePlayerChoice(playerChoice) {
     setButtonsState(true);
 }
 
-// Get computer choice - Truly Random
+// Get computer choice - Advanced Difficulty System
 function getComputerChoice(playerChoice) {
-    // Always use completely random choice regardless of difficulty
-    const computerChoice = getRandomChoice();
+    const strategy = difficultyStrategies[gameState.difficulty];
+    let computerChoice;
     
-    // Add to history for statistics only
+    // Update move history
     playerMoveHistory.push(playerChoice);
-    computerMoveHistory.push(computerChoice);
+    lastPlayerMove = playerChoice;
     
-    // Keep only last 10 moves
-    if (playerMoveHistory.length > 10) {
+    // Keep only last 20 moves for analysis
+    if (playerMoveHistory.length > 20) {
         playerMoveHistory.shift();
-        computerMoveHistory.shift();
     }
     
-    // No mistake tracking for truly random play
-    gameState.lastComputerMistake = false;
+    // Apply difficulty strategy
+    switch (strategy.strategy) {
+        case 'lose_on_purpose':
+            computerChoice = getLoseOnPurposeChoice(playerChoice);
+            break;
+        case 'random':
+            computerChoice = getRandomChoice();
+            break;
+        case 'counter_last':
+            computerChoice = getCounterLastChoice(playerChoice);
+            break;
+        case 'analyze_patterns':
+            computerChoice = getAnalyzePatternsChoice();
+            break;
+        default:
+            computerChoice = getRandomChoice();
+    }
+    
+    // Add computer choice to history
+    computerMoveHistory.push(computerChoice);
+    if (computerMoveHistory.length > 20) {
+        computerMoveHistory.shift();
+    }
     
     return computerChoice;
 }
@@ -260,6 +279,85 @@ function getComputerChoice(playerChoice) {
 // Random choice strategy
 function getRandomChoice() {
     return choices[Math.floor(Math.random() * choices.length)];
+}
+
+// Easy: Computer mostly loses or draws on purpose
+function getLoseOnPurposeChoice(playerChoice) {
+    const loseRate = difficultyStrategies.easy.loseRate;
+    
+    if (Math.random() < loseRate) {
+        // 85% chance to lose or draw - make computer choose a losing move
+        const counterMap = {
+            'rock': 'scissors',      // If player chooses rock, computer chooses scissors (player wins)
+            'paper': 'rock',         // If player chooses paper, computer chooses rock (player wins)
+            'scissors': 'paper'      // If player chooses scissors, computer chooses paper (player wins)
+        };
+        
+        // 70% chance to choose losing move, 15% chance to draw
+        if (Math.random() < 0.7) {
+            return counterMap[playerChoice];
+        } else {
+            // Draw by choosing the same move
+            return playerChoice;
+        }
+    } else {
+        // 15% chance to win - choose a winning move
+        const winMap = {
+            'rock': 'paper',         // If player chooses rock, computer chooses paper (computer wins)
+            'paper': 'scissors',     // If player chooses paper, computer chooses scissors (computer wins)
+            'scissors': 'rock'       // If player chooses scissors, computer chooses rock (computer wins)
+        };
+        return winMap[playerChoice];
+    }
+}
+
+// Hard: Counter the player's last move
+function getCounterLastChoice(playerChoice) {
+    // Counter the current move (predicting player will repeat or follow pattern)
+    const counterMap = {
+        'rock': 'paper',
+        'paper': 'scissors',
+        'scissors': 'rock'
+    };
+    
+    // 60% chance to counter, 40% chance to be random
+    if (Math.random() < 0.6) {
+        return counterMap[playerChoice];
+    } else {
+        return getRandomChoice();
+    }
+}
+
+// Expert: Analyze patterns and use probability
+function getAnalyzePatternsChoice() {
+    if (playerMoveHistory.length < 3) {
+        return getRandomChoice();
+    }
+    
+    // Count frequency of each move
+    const moveCounts = { rock: 0, paper: 0, scissors: 0 };
+    playerMoveHistory.forEach(move => {
+        moveCounts[move]++;
+    });
+    
+    // Find most frequent move
+    const mostFrequent = Object.keys(moveCounts).reduce((a, b) => 
+        moveCounts[a] > moveCounts[b] ? a : b
+    );
+    
+    // Counter the most frequent move
+    const counterMap = {
+        'rock': 'paper',
+        'paper': 'scissors',
+        'scissors': 'rock'
+    };
+    
+    // 75% chance to counter most frequent, 25% chance to be random
+    if (Math.random() < 0.75) {
+        return counterMap[mostFrequent];
+    } else {
+        return getRandomChoice();
+    }
 }
 
 // Pattern-based strategy
@@ -737,6 +835,7 @@ function showVictoryScreen() {
 function hideVictoryScreen() {
     elements.victoryScreen.classList.remove('show');
 }
+
 
 // Reset game
 function resetGame() {

@@ -1,13 +1,13 @@
 # 🎮 Rock Paper Scissors - Ultimate Edition
 
-A modern, interactive Rock Paper Scissors game with **4 stunning themes**, **instant responsive gameplay**, **mobile-first responsive design**, and **beautiful glassmorphism effects**.
+A modern, interactive Rock Paper Scissors game with **4 stunning themes**, **advanced AI difficulty system**, **mobile-first responsive design**, and **beautiful glassmorphism effects**.
 
 ## ✨ Features
 
 ### 🎯 Core Gameplay
 
-- **Classic Rock Paper Scissors** - Play against truly random computer AI
-- **Instant Responsive Gameplay** - Zero delays, immediate results
+- **Classic Rock Paper Scissors** - Play against intelligent computer AI
+- **4 Difficulty Levels** - Easy, Medium, Hard, and Expert with progressively smarter AI
 - **Live Scoreboard** - Track wins, losses, and draws with persistent storage
 - **Streak Counter** - 🔥 Track consecutive wins with animated flame icon
 - **Mobile-First Design** - Optimized for all devices with touch-friendly controls
@@ -29,12 +29,12 @@ A modern, interactive Rock Paper Scissors game with **4 stunning themes**, **ins
 - **Character Avatars** - Themed avatars that change with each theme
 - **Choice Animations** - Dynamic animations for selections with enhanced visual feedback
 
-### 🎲 Fair & Random Gameplay
+### 🧠 Advanced AI Difficulty System
 
-- **Truly Random Computer** - Computer uses pure random number generation
-- **No AI Strategies** - No pattern recognition or adaptive behavior
-- **Fair Play** - Each move has equal probability (33.33% for rock, paper, scissors)
-- **Instant Response** - Computer choice appears immediately after player selection
+- **Easy Mode** - Computer mostly loses or draws on purpose (about 70% of the time)
+- **Medium Mode** - Computer chooses moves completely at random with no bias
+- **Hard Mode** - Computer uses basic counter strategy, predicting and countering your last move
+- **Expert Mode** - Computer analyzes your most frequent choices and uses probability to counter
 
 ### 🎪 Victory Screen & Celebrations
 
@@ -75,11 +75,11 @@ A modern, interactive Rock Paper Scissors game with **4 stunning themes**, **ins
 ## 🎯 How to Play
 
 1. **Choose your weapon** - Click Rock, Paper, or Scissors
-2. **Instant results** - Computer choice and result appear immediately
+2. **Select difficulty** - Choose from Easy, Medium, Hard, or Expert
 3. **Watch the animations** - See your choice and the computer's choice
 4. **Check the result** - Win, lose, or draw with animated feedback
 5. **Build your streak** - Try to win multiple times in a row
-6. **Customize** - Change themes as you like
+6. **Customize** - Change themes and difficulty as you like
 
 ## 🎨 Theme Customization
 
@@ -88,12 +88,33 @@ A modern, interactive Rock Paper Scissors game with **4 stunning themes**, **ins
 - Your theme preference is automatically saved
 - Each theme features unique animated backgrounds and color palettes
 
-## ⚡ Performance Features
+## 🧠 Difficulty System
 
-- **Instant Gameplay** - Zero delays between player choice and computer response
-- **Fast Loading** - No external images, pure CSS animations
-- **Responsive Design** - Optimized for all devices and screen sizes
-- **Smooth Animations** - CSS-based effects for consistent performance
+The game features 4 distinct difficulty levels, each with unique AI behavior:
+
+### 😊 Easy Mode
+
+- **Strategy**: Computer mostly loses or draws on purpose (85% of the time)
+- **Perfect for**: Beginners and casual players
+- **Win Rate**: You'll win approximately 85% of games
+
+### 😐 Medium Mode
+
+- **Strategy**: Computer chooses moves completely at random with no bias
+- **Perfect for**: Fair and balanced gameplay
+- **Win Rate**: True 50/50 random gameplay
+
+### 😈 Hard Mode
+
+- **Strategy**: Computer uses basic counter strategy, predicting and countering your last move
+- **Perfect for**: Players who want a challenge
+- **Win Rate**: Computer counters your moves 60% of the time
+
+### 🤖 Expert Mode
+
+- **Strategy**: Computer analyzes your most frequent choices and uses probability to counter
+- **Perfect for**: Advanced players seeking maximum challenge
+- **Win Rate**: Computer counters your patterns 75% of the time
 
 ## 💾 Data Persistence
 
@@ -102,6 +123,7 @@ The game automatically saves:
 - Win/Loss/Draw counts
 - Current streak
 - Selected theme
+- Difficulty level
 
 ## 🛠️ Technical Details
 
@@ -119,7 +141,7 @@ The game automatically saves:
 - **CSS Variables** - Dynamic theming system with 4 unique themes
 - **CSS Animations** - Smooth transitions, keyframes, and effects
 - **ES6+ JavaScript** - Modern JavaScript features
-- **Pure Random Generation** - Fair and unbiased computer choices
+- **Advanced AI Algorithms** - Pattern recognition, counter strategies, and probability analysis
 
 ### Browser Support
 
@@ -139,12 +161,12 @@ The game automatically saves:
 
 ## 🌟 Special Features
 
-### Instant Responsive Gameplay
+### Advanced AI System
 
-- **Zero Delays** - Immediate computer response after player choice
-- **Fast Performance** - No external image loading or network requests
-- **Smooth Animations** - CSS-based effects for consistent 60fps performance
-- **Fair Random Play** - Truly random computer choices for balanced gameplay
+- **Pattern Recognition** - Computer learns from your moves
+- **Counter Strategies** - AI predicts and counters your patterns
+- **Probability Analysis** - Computer analyzes your most frequent choices
+- **Adaptive Difficulty** - Each level provides a different challenge
 
 ### Enhanced Visual Effects
 
@@ -185,29 +207,26 @@ The game automatically saves:
 
 ## 🎯 Recent Major Updates
 
-### ⚡ Instant Gameplay System
+### 🧠 Advanced AI Difficulty System
 
-- **Zero Delays** - Removed all setTimeout delays for instant responsiveness
-- **Immediate Results** - Computer choice and result display instantly
-- **Fast & Responsive** - Game feels snappy and modern
+- **4 Difficulty Levels** - Easy, Medium, Hard, and Expert with unique strategies
+- **Smart AI Logic** - Computer behavior changes significantly between difficulties
+- **Pattern Analysis** - Expert mode analyzes player move frequency and counters
+- **Counter Strategies** - Hard mode predicts and counters player's last move
 
-### 🎨 Pure CSS Visual System
+### 🎮 Enhanced User Experience
 
-- **No External Images** - Removed all background images for faster loading
-- **CSS-Only Animations** - All effects use gradients and CSS animations
-- **Optimized Performance** - Faster page load times and smoother gameplay
+- **Improved UI** - Better difficulty selection and display
+- **Persistent Settings** - Difficulty level saved across sessions
+- **Responsive Design** - Optimized for mobile and desktop
+- **Clean Header Layout** - Organized controls with clear labeling
 
-### 🎲 Fair Random Gameplay
+### 🎨 Visual Improvements
 
-- **Truly Random Computer** - Removed all AI strategies and pattern recognition
-- **Equal Probability** - Each move has 33.33% chance (rock, paper, scissors)
-- **No Bias** - Computer doesn't analyze or respond to player moves
-
-### 🧹 Code Cleanup
-
-- **Removed Sky Theme** - Eliminated sky theme and all related code
-- **Simplified Logic** - Streamlined game logic for better performance
-- **Cleaner Codebase** - Removed 100+ lines of unused background code
+- **Enhanced Controls** - Better organized control buttons and dropdowns
+- **Smooth Transitions** - Improved animations and hover effects
+- **Clean Header Design** - Professional layout with proper spacing
+- **Responsive Layout** - Adapts beautifully to all screen sizes
 
 ### 📱 Mobile Optimization
 
@@ -245,4 +264,4 @@ Feel free to contribute by:
 
 **Enjoy playing Rock Paper Scissors - Ultimate Edition! 🎮✨**
 
-_Now featuring 4 stunning themes, instant responsive gameplay, and mobile-first responsive design!_
+_Now featuring 4 stunning themes, advanced AI difficulty system, and mobile-first responsive design!_

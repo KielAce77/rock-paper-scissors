@@ -117,6 +117,8 @@
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px var(--shadow-secondary);
+    min-height: 44px;
+    min-width: 44px;
 }
 
 .control-btn:hover {
@@ -255,6 +257,9 @@
 /* Enhanced Theme Dropdowns with Better Background */
 .theme-dropdown,
 .difficulty-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
     background: linear-gradient(135deg, rgba(26, 26, 26, 0.98) 0%, rgba(45, 45, 45, 0.95) 100%);
     border: 2px solid var(--border-color);
     border-radius: 15px;
@@ -263,6 +268,14 @@
     display: none;
     backdrop-filter: blur(3px);
     box-shadow: 0 15px 40px var(--shadow-color), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    min-width: 140px;
+    z-index: 1001;
+}
+
+.theme-dropdown.show,
+.difficulty-dropdown.show {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
 }
 
 /* Enhanced Victory Screen with Better Background */
@@ -642,118 +655,12 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-/* Controls Bar */
-.controls-bar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    display: flex;
-    gap: 10px;
-    z-index: 10000;
-    background: 
-        linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-accent) 50%, var(--bg-tertiary) 100%),
-        radial-gradient(ellipse at top, var(--accent-color) 0%, transparent 70%);
-    padding: 20px;
-    border-bottom: 3px solid var(--border-color);
-    box-shadow: 0 6px 30px var(--shadow-color), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    justify-content: flex-end;
-    min-height: 80px;
-    backdrop-filter: blur(10px);
-}
+/* Removed duplicate controls-bar styles - using game-header instead */
 
-.control-btn {
-    background: linear-gradient(135deg, var(--glass-bg) 0%, var(--glass-bg-accent) 100%);
-    border: 2px solid var(--border-color);
-    color: var(--text-primary);
-    padding: 12px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(8px);
-    font-size: 1.2rem;
-    box-shadow: 0 6px 20px var(--shadow-color), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
+/* Theme Dropdown - using existing styles from header controls */
 
-.control-btn:hover {
-    background: var(--accent-color);
-    transform: scale(1.1);
-    box-shadow: 0 0 20px var(--accent-color);
-}
-
-/* Theme Dropdown */
-.theme-controls {
-    position: relative;
-}
-
-.theme-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-accent) 100%);
-    border: 2px solid var(--border-color);
-    border-radius: 15px;
-    padding: 10px;
-    margin-top: 10px;
-    display: none;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 15px 40px var(--shadow-color), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    min-width: 140px;
-    z-index: 1001;
-}
-
-.theme-dropdown.show {
-    display: block;
-    animation: fadeIn 0.3s ease-out;
-}
-
-.theme-option {
-    background: none;
-    border: none;
-    color: var(--text-primary);
-    padding: 8px 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: block;
-    width: 100%;
-    text-align: left;
-    font-size: 0.9rem;
-}
-
-.theme-option:hover {
-    background: var(--accent-color);
-    transform: translateX(5px);
-}
-
-/* Difficulty Controls */
-.difficulty-controls {
-    position: relative;
-}
-
-.difficulty-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-accent) 100%);
-    border: 2px solid var(--border-color);
-    border-radius: 15px;
-    padding: 10px;
-    margin-top: 10px;
-    display: none;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 15px 40px var(--shadow-color), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    min-width: 160px;
-    z-index: 1001;
-}
-
-
-
-.difficulty-dropdown.show {
-    display: block;
-    animation: fadeIn 0.3s ease-out;
-}
-
+/* Theme options styling */
+.theme-option,
 .difficulty-option {
     background: none;
     border: none;
@@ -768,10 +675,17 @@ body {
     font-size: 0.9rem;
 }
 
+.theme-option:hover,
 .difficulty-option:hover {
     background: var(--accent-color);
     transform: translateX(5px);
 }
+
+/* Difficulty Controls - using existing styles from header controls */
+
+
+
+/* Removed duplicate difficulty option styles - using unified theme/difficulty option styles above */
 
 /* Difficulty Display */
 .difficulty-display {
